@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div id="title-large"class="large-12 columns">
+        <h1 class="title">{{ pageTitle }} 
+        </h1></div>
+            <div class="large-12 columns">
+        <h4 class="text-right">blah blah blah</h4>
+    </div>
+    <div class="large-12 columns container">
+        {% if details %}
+        <ul class="breadcrumbs">
+                <li class="current"><a href="#">Product Collection</a></li>
+                <li class="unavailable" ><a href="#">Product Category</a></li>
+                <li class="unavailable"><a href="#">Product</a></li>
+            </ul>
+        <div class="large-9 columns left ">
+            <h3>Product Categories</h3>
+            {{ details }}
+                <dl class="accordion" data-accordion>
+                    {% for c_id, name, desc, img_src in categories %}
+                    <dd class="accordion-navigation">
+                        <a href="#{{name}}">{{name}}</a>
+                        <div id="{{name}}" class="content"><p>{{desc}}</p>wesxrdctfvygbuni<p> {{img_src}}</p>
+                        </div>
+                    </dd>
+                    {% endfor %}
+            </dl>
+            {% else %}
+            <ul class="breadcrumbs">
+                <li><a href="/collection/">Product Collection</a></li>
+                <li class="current" ><a href="#">Product Category</a></li>
+                <li class="unavailable"><a href="#">Product</a></li>
+            </ul>
+            <div class="large-9 columns left ">
+            {% endif %}
+                <h3>Products</h3>
+            <ul class="clearing-thumbs small-block-grid-2 medium-block-grid-3 large-block-grid-3 text-center " data-clearing>
+                {% for product in products %}
+                <li><a href="/collection/{{product}}/"><h5 class="">{{product}}</h5></a> <a href="/static/img/page/{{product}}">
+                    <img class="" data-caption="{{ product }}"  src="/static/img/page/{{product}}" alt="image1" /></a>
+                    __product name__
+                </li>
+                {% endfor %}
+            </ul>
+                           <div class="pagination-centered">
+                               <ul class="pagination">
+                                        {% if products.has_previous %}
+                                        <li class="arrow">
+                                            <a href="?page={{ products.previous_page_number }}">&laquo;</a></li>
+                                        {% endif %}
+                                        <li class="current">
+                                            <a href="">Page {{ products.number }} of {{ products.paginator.num_pages}}.</a>
+                                        </li>
+                                        {% if products.has_next %}
+                                        <li class="arrow">
+                                            <a href="?page={{ products.next_page_number }}">&raquo;</a></li>
+                                        {% endif %}
+                               </ul>
+                           </div>
+        </div>
+
+        <div class="large-3 columns right show-for-large-up ">
+            <ul class="mtree bubba">
+              {% for parent, child in catalogue %}
+              {% if child %}
+              <li><a href="#">{{ parent }}</a>
+                  {% else %}
+                  <li><a href="/collection/{{parent}}/">{{ parent }}</a>
+                      {% endif %}
+                      {% if child %}
+                      <ul>
+                          {% for elem in child %}
+                          <li><a href="/collection/{{elem}}/">{{ elem }}</a></li>
+                          {% endfor %}
+                      </ul>
+                      {% endif %}
+              </li>
+              {% endfor %}
+          </ul>
+            
+        </div>
+        </div>
+    </div>
+{% endblock content %}

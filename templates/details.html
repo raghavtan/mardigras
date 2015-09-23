@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div id="title-large"class="large-12 columns">
+        <h1 class="title">{{ pageTitle }} 
+        </h1></div>
+            <div class="large-12 columns">
+        <h4 class="text-right">blah blah blah</h4>
+                </div>
+    <div class="large-12 columns container">
+        <div class="large-12 columns">
+            <ul class="example-orbit" data-orbit>
+  <li>
+    <img src="/static/img/image1.jpg" alt="slide 1" />
+    <div class="orbit-caption">
+      Caption One.
+    </div>
+  </li>
+  <li class="active">
+    <img src="/static/img/image2.jpg" alt="slide 2" />
+    <div class="orbit-caption">
+      Caption Two.
+    </div>
+  </li>
+  <li>
+    <img src="/static/img/image3.jpg" alt="slide 3" />
+    <div class="orbit-caption">
+      Caption Three.
+    </div>
+  </li>
+</ul>
+        </div>
+        <div class="large-7 columns right">
+            <p class=" text-justify ">{{ details }}</p>
+            {% if form %}
+            <form action="#" method="post">    
+            <p class=" text-justify ">{{ form }}</p>
+            <input id="form_submit" class="expand radius button" type="submit" value="SUBMIT">
+            </form>
+            {% endif %}
+            </div>
+        <div class="large-5 columns left">
+            <ul class="clearing-thumbs large-block-grid-1 medium-block-grid-2 small-block-grid-2" data-clearing>
+                <li><a href="/static/img/Aviary Stock Photo 1.png">
+                    <img class="" data-caption=""  src="/static/img/Aviary Stock Photo 1.png"/></a>
+                </li>
+                <li><a href="/static/img/Aviary Stock Photo 2.png">
+                    <img class="" data-caption=""  src="/static/img/Aviary Stock Photo 2.png"/></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<ul class=" large-block-grid-6 medium-block-grid-6 small-block-grid-3">
+            {% for obj in images %}
+                <li>obj.productImage</li>
+                {% endfor %}
+</ul>
+<div class="large-12 colums">{{ map }}</div>
+{% endblock content %}

@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div id="title-large"class="large-12 columns">
+        <h1 class="title">{{ pageTitle }} 
+        </h1></div>
+            <div class="large-12 columns">
+        <h4 class="text-right">blah blah blah</h4>
+                </div>
+    <div class="large-12 columns container">
+        <ul class="breadcrumbs">
+                <li><a href="/collection/">Product Collection</a></li>
+                <li class><a href="/collection/category/">Product Category</a></li>
+                <li class="current"><a href="#">Product</a></li>
+            </ul>
+        <div class="large-12 columns">
+            <ul class="example-orbit clearing-thumbs" data-orbit>
+  <li><a href="/static/img/product01-01.jpg">
+    <img src="/static/img/product01-01.jpg" alt="slide 1" /></a>
+    <div class="orbit-caption">
+      Caption One.
+    </div>
+  </li>
+  <li class="active">
+    <img src="/static/img/product01-02.jpg" alt="slide 2" />
+    <div class="orbit-caption">
+      Caption Two.
+    </div>
+  </li>
+  <li>
+    <img src="/static/img/product01-03.jpg" alt="slide 3" />
+    <div class="orbit-caption">
+      Caption Three.
+    </div>
+  </li>
+</ul>
+            {{product_image_flex}}    
+        </div>
+        <div class="large-12 columns">
+            <dl class="accordion" data-accordion>
+  <dd class="accordion-navigation">
+    <a href="#panel1a">Product Specifications</a>
+    <div id="panel1a" class="content active">
+      <ul>
+            <li>Fuel pump</li>
+            <li>Fuel injector</li>
+            <li>Ignition coil</li>
+            <li>Coolant temperature sensor</li>
+            <li>ECU(engine control unit)</li>
+            <li>Lean angle sensor</li>
+            <li>Crankshaft position sensor</li>
+            <li>FID (fast idle solenoid)</li>
+            <li>Air filter case</li>
+            <li>Throttle body</li>
+            <li>Throttle body sensor assembly</li>
+            <li>Intake air temperature sensor</li>
+            <li>Throttle position sensor</li>
+      </ul>
+    </div>
+  </dd>
+  <dd class="accordion-navigation">
+    <a href="#panel2a">Product Description</a>
+    <div id="panel2a" class="content">
+      The main function of a fuel supply system is to provide fuel to the combustion chamber at the optimum
+air-fuel ratio in accordance with the engine operating conditions and the atmospheric temperature. In the
+conventional carburetor system, the air-fuel ratio of the mixture that is supplied to the combustion
+chamber is created by the volume of the intake air and the fuel that is metered by the jet used in the
+respective carburetor.
+    </div>
+  </dd>
+</dl>
+        </div>
+                <div class="large-9 medium-12 columns left"><h3>{{related_products}}Related Products</h3>
+                <ul class="clearing-thumbs small-block-grid-1 medium-block-grid-2 large-block-grid-4 " data-clearing>
+                {% for product in products %}
+                <li><a href="/static/img/page/{{product}}">
+                    <img class="" data-caption="{{ product }}"  src="/static/img/page/{{product}}" alt="image1" /></a>
+                </li>
+                {% endfor %}
+                </ul>
+                           <div class="pagination-centered">
+                               <ul class="pagination">
+                                        {% if products.has_previous %}
+                                        <li class="arrow">
+                                            <a href="?page={{ products.previous_page_number }}">&laquo;</a></li>
+                                        {% endif %}
+                                        <li class="current">
+                                            <a href="">Page {{ products.number }} of {{ products.paginator.num_pages}}.</a>
+                                        </li>
+                                        {% if products.has_next %}
+                                        <li class="arrow">
+                                            <a href="?page={{ products.next_page_number }}">&raquo;</a></li>
+                                        {% endif %}
+                               </ul>
+                           </div>
+        </div>
+        <div class="large-3 columns right show-for-large-up">
+            <ul class="mtree bubba">
+              {% for parent, child in catalogue %}
+              {% if child %}
+              <li><a href="#">{{ parent }}</a>
+                  {% else %}
+                  <li><a href="/collection/{{parent}}/">{{ parent }}</a>
+                      {% endif %}
+                      {% if child %}
+                      <ul>
+                          {% for elem in child %}
+                          <li><a href="/collection/{{elem}}/">{{ elem }}</a></li>
+                          {% endfor %}
+                      </ul>
+                      {% endif %}
+              </li>
+              {% endfor %}
+          </ul>
+        </div>
+    </div>
+</div>
+{% endblock content %}

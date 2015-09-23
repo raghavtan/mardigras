@@ -1,0 +1,144 @@
+{% load staticfiles%}
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      <title>MardiGras | {{ pageTitle }}</title>
+      <link rel="stylesheet" href="{% static "css/404.css" %}" />
+    <link rel="stylesheet" href="{% static "css/normalize.css" %}" />
+      <link rel="stylesheet" href="{% static "css/foundation.min.css"%}" />
+    <link rel="stylesheet" href="{% static "css/foundation.css"%}" />
+    <link rel="stylesheet" href="{% static "css/style.css"%}" />
+      <link rel="stylesheet" href="{% static "css/webicons.css"%}" />
+    <script src="{% static "js/vendor/modernizr.js"%}"></script>
+      <link href='http://fonts.googleapis.com/css?family=Monoton' rel='stylesheet' type='text/css'>
+      
+  </head>
+  <body>
+    <div class="contain-to-grid fixed " >
+    <nav class="top-bar" data-topbar role="navigation">
+        <ul class="title-area">
+            <li class="name">
+                <h1><a href="/" >MARDI GRAS</a></h1>
+            </li>
+            <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+        </ul>
+        <section class="top-bar-section ">
+            <ul i-d="nav" class="right">
+                {% for k, u, v, drop in menuList %}
+                {{ current }}
+                {% if v %}
+                <li class="{{ drop }} "><a href="{{ u }}">{{ k }}</a>
+                    <ul class="dropdown">
+                        {% for item in v %}
+                        <li><a href="{{ u }}{{item}}/">{{ item }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% else %}
+                <li class="" style="padding-right:20px"><a href="{{ u }}">{{ k }}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </section>
+        </nav>
+      </div>
+      <div class="show-for-medium-down">
+          <ul class="mtree bubba">
+              {% for parent, child in catalogue %}
+              {% if child %}
+              <li><a href="#">{{ parent }}</a>
+                  {% else %}
+                  <li><a href="/collection/{{parent}}/">{{ parent }}</a>
+                      {% endif %}
+                      {% if child %}
+                      <ul>
+                          {% for elem in child %}
+                          <li><a href="/collection/{{elem}}/">{{ elem }}</a></li>
+                          {% endfor %}
+                      </ul>
+                      {% endif %}
+              </li>
+              {% endfor %}
+          </ul>
+      </div>
+          {% block content %}  {% endblock content %}
+      <div class="or-spacer">
+              <div class="mask"></div>
+              <span></span>
+          </div>
+      <div class="foot row">
+ <ul class="large-block-grid-3 medium-block-grid-3 small-block-grid-1 text-center">   
+     <li>
+    <div class=" text-center">
+        <h3>Useful Links</h3>
+            <ul class="side-nav">
+                <li><a href="#">Lorem Ipsum</a></li>
+                <li><a href="#">Ellem Ciet</a></li>
+                <li><a href="#">Currivitas</a></li>
+                <li><a href="#">Salim Aritu</a></li>
+            </ul>
+    </div>
+    </li>
+    <!-- Second Column -->
+    <li>
+    <div class="text-center">
+        <h3>Terms</h3>
+            <ul class="side-nav">
+                <li><a href="#">Lorem Ipsum</a></li>
+                <li><a href="#">Ellem Ciet</a></li>
+                <li><a href="#">Currivitas</a></li>
+                <li><a href="#">Salim Aritu</a></li>
+            </ul>
+    </div>
+    </li>
+         <li class="show-for-medium-up" >
+    <div class="text-center">
+        <h3>Socialize</h3>
+        <ul class="side-nav">
+            <li><a href="#"><img src="{% static "img/icon_fb.png"%}" alt="Facebook"> </a></li>
+            <li><a href="#"><img src="{% static "img/icon_twitter.png"%}" alt="Facebook"> </a></li>
+            <li><a href="#"><img src="{% static "img/icon_in.png"%}" alt="Facebook"> </a></li>
+        </ul>
+    </div>
+    </li>
+     <li class="show-for-small">
+     <div class="one-fourth last">
+        <h3>Socialize</h3>
+            <a href="#"><img src="{% static "img/icon_fb.png"%}" alt="Facebook"></a>
+            <a href="#"><img src="{% static "img/icon_twitter.png"%}" alt="Facebook"></a>
+            <a href="#"><img src="{% static "img/icon_in.png"%}" alt="Facebook"></a>
+    </div>
+         </li>
+    </ul>
+    <div class="large-12 columns text-center show-for-medium-up" >
+        <h3> Information</h3>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet enim id dui tincidunt vestibulum rhoncus a felis.
+        <div id="social_icons">
+        Theme by <a href="#">Raghavendra Tandon</a><br /> Photos © <a href="#" title="#">hash</a>
+        </div>
+        </div>
+          </div>
+      <script src="{% static "js/404.js"%}"></script>
+    <script src="{% static "js/vendor/jquery.js"%}"></script>
+    <script src="{% static "js/foundation.min.js"%}"></script>
+      <script src="{% static "js/tree.js"%}"></script>
+    <script src="{% static "js/foundation/foundation.clearing.js"%}"></script>
+    <script>
+      $(document).foundation();
+        
+    </script>
+      <script>
+  $(document).foundation({
+    accordion: {
+      callback : function (accordion) {
+        console.log(accordion);
+      }
+    }
+  });
+</script>
+    
+  </body>
+</html>
